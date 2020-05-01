@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Iuliia
 {
-    internal static class IuliiaEngine
+    public static class Engine
     {
         private const int ENDING_LENGTH = 2;
 
@@ -13,12 +13,12 @@ namespace Iuliia
         /// <param name="source"></param>
         /// <param name="scheme"></param>
         /// <returns></returns>
-        public static string Translate(string source, IuliiaScheme scheme)
+        public static string Translate(string source, Scheme scheme)
         {
             return string.Join(" ", source.Split().Select(w => TranslateWord(w, scheme)));
         }
 
-        private static string TranslateWord(string word, IuliiaScheme scheme)
+        private static string TranslateWord(string word, Scheme scheme)
         {
             var wordInfo = SplitWord(word);
             if (scheme.TryTranslateEnding(wordInfo.Ending, out var translatedEnding))
@@ -27,7 +27,7 @@ namespace Iuliia
             return TranslateLetters(word, scheme);
         }
 
-        private static string TranslateLetters(string letters, IuliiaScheme scheme)
+        private static string TranslateLetters(string letters, Scheme scheme)
         {
             return string.Join(string.Empty, ReadLetters(letters).Select(scheme.TranslateLetter));
         }
@@ -46,34 +46,11 @@ namespace Iuliia
         {
             for (int i = 0; i < stem.Length; i++)
             {
-                yield return new LetterInfo(string.Empty, string.Empty, string.Empty);
+                var previous = i > 0 ? stem[i - 1] : (char?) null;
+                var next = i < stem.Length + 1 ? stem[i + 1] : (char?) null;
+                
+                yield return new LetterInfo(previous, stem[i], next);
             }
-        }
-    }
-
-    internal class WordInfo
-    {
-        public string Stem { get; }
-        public string Ending { get; }
-
-        public WordInfo(string stem, string ending)
-        {
-            Stem = stem;
-            Ending = ending;
-        }
-    }
-
-    internal class LetterInfo
-    {
-        public string Previous { get; } // todo string or rune
-        public string Current { get; }
-        public string Next { get; }
-
-        public LetterInfo(string previous, string current, string next)
-        {
-            Previous = previous;
-            Current = current;
-            Next = next;
         }
     }
 }
