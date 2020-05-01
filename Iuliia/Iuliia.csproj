@@ -1,8 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
         <LangVersion>8</LangVersion>
         <TargetFrameworks>netstandard2.1</TargetFrameworks>
+        <PackageId>Iuliia</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>Andrey Belianin</Authors>
+        <Description>Library for transliteration from russian cyrilic to latin</Description>
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
 
     <ItemGroup>
