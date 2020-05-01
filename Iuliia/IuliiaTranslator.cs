@@ -9,10 +9,10 @@ namespace Iuliia
         private const int ENDING_LENGTH = 2;
 
         /// <summary>
-        /// todo
+        /// Транслитирирует кириллическую строку в латинскую
         /// </summary>
-        /// <param name="source"></param>
-        /// <param name="scheme"></param>
+        /// <param name="source">Строка для транслитерации</param>
+        /// <param name="scheme">Схема транслитерации</param>
         /// <returns></returns>
         public static string Translate(string source, Scheme scheme)
         {
