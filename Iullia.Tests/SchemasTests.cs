@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Iuliia;
 using NUnit.Framework;
@@ -7,25 +10,28 @@ namespace Iullia.Tests
     [TestFixture]
     public class SchemasTests
     {
-        [Test]
-        public void TelegramScheme_Should_TranslateCorrect()
+        [Test, TestCaseSource(typeof(SchemasTestCasesFactory))]
+        public void Scheme_Should_TranslateOwnSamples(Sample sample, Scheme scheme)
         {
-            var original = "Юлия, съешь ещё этих мягких французских булок из Йошкар-Олы, да выпей алтайского чаю";
-            var expected = "Iuliia, sesh esce etih miagkih francuzskih bulok iz Ioshkar-Oly, da vypei altaiskogo chaiu";
-
-            Assert.AreEqual(expected, Engine.Translate(original, Schemas.Telegram));
+            Assert.AreEqual(sample.Translated, Engine.Translate(sample.Original, scheme));
+        }
+    }
+    
+    public class SchemasTestCasesFactory : IEnumerable<TestCaseData>
+    {
+        public IEnumerator<TestCaseData> GetEnumerator()
+        {
+            return typeof(Schemas)
+                .GetProperties()
+                .Select(p => (Scheme) p.GetValue(null))
+                .SelectMany(scheme => scheme.Samples.Select(sample =>
+                    new TestCaseData(sample, scheme).SetArgDisplayNames(scheme.Name)))
+                .GetEnumerator();
         }
 
-        [Test, TestCaseSource(nameof(SchemeCases))]
-        public void Scheme_Should_TranslateOwnSamples(Scheme scheme)
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            foreach (var sample in scheme.Samples)
-            {
-                Assert.AreEqual(sample.Translated, Engine.Translate(sample.Original, scheme), scheme.Name);
-            }
+            return GetEnumerator();
         }
-
-        private static readonly object[][] SchemeCases =
-            typeof(Schemas).GetProperties().Select(p => new[] {p.GetValue(null)}).ToArray();
     }
 }
