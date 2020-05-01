@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Text;
 using System.Text.Json;
 using Iuliia.Utils;
 
@@ -8,12 +11,11 @@ namespace Iuliia.Dto
 {
     internal static class SchemeReader
     {
-        public static Scheme Read(string filename)
+        public static Scheme Read(byte[] file)
         {
-            var file = File.ReadAllText($"Schemas/{filename}");
-            
             var dto = JsonSerializer.Deserialize<SchemeDto>(file);
-            
+
+
             return new Scheme(
                 dto.Name,
                 GetMapping(dto.Mapping.ToDictionary(k => k.Key[0], v => v.Value)),

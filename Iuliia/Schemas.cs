@@ -4,35 +4,35 @@ namespace Iuliia
 {
     public static class Schemas
     {
-        public static Scheme Wikipedia { get; } = SchemeReader.Read("wikipedia.json");
-        public static Scheme Mosmetro { get; } = SchemeReader.Read("mosmetro.json");
-        public static Scheme YandexMaps { get; } = SchemeReader.Read("yandex_maps.json");
-        public static Scheme YandexMoney { get; } = SchemeReader.Read("yandex_money.json");
+        public static Scheme Wikipedia { get; } = SchemeReader.Read(Properties.Resources.WIKIPEDIA);
+        public static Scheme Mosmetro { get; } = SchemeReader.Read(Properties.Resources.MOSMETRO);
+        public static Scheme YandexMaps { get; } = SchemeReader.Read(Properties.Resources.YANDEX_MAPS);
+        public static Scheme YandexMoney { get; } = SchemeReader.Read(Properties.Resources.YANDEX_MONEY);
         /// <summary>
         /// Инструкция Минсвязи о порядке обработки международных телеграмм. Некрасивая, зато без апострофов.
         /// </summary>
-        public static Scheme Telegram { get; } = SchemeReader.Read("telegram.json");
-        public static Scheme Scientific { get; } = SchemeReader.Read("scientific.json");
-        public static Scheme ALA_LC  { get; } = SchemeReader.Read("ala_lc.json");
-        public static Scheme ALA_LC_ALT { get; } = SchemeReader.Read("ala_lc_alt.json");
-        public static Scheme BGN_PCGN { get; } = SchemeReader.Read("bgn_pcgn.json");
-        public static Scheme BGN_PCGN_ALT { get; } = SchemeReader.Read("bgn_pcgn_alt.json");
-        public static Scheme BS_2979 { get; } = SchemeReader.Read("bs_2979.json");
-        public static Scheme BS_2979_ALT { get; } = SchemeReader.Read("bs_2979_alt.json");
-        public static Scheme GOST_16876 { get; } = SchemeReader.Read("gost_16876.json");
-        public static Scheme GOST_16876_ALT { get; } = SchemeReader.Read("gost_16876_alt.json");
-        public static Scheme GOST_52290 { get; } = SchemeReader.Read("gost_52290.json");
-        public static Scheme GOST_52535 { get; } = SchemeReader.Read("gost_52535.json");
-        public static Scheme GOST_7034 { get; } = SchemeReader.Read("gost_7034.json");
-        public static Scheme GOST_779 { get; } = SchemeReader.Read("gost_779.json");
-        public static Scheme GOST_779_ALT { get; } = SchemeReader.Read("gost_779_alt.json");
-        public static Scheme ICAO_DOC_9303 { get; } = SchemeReader.Read("icao_doc_9303.json");
-        public static Scheme ISO_9_1954 { get; } = SchemeReader.Read("iso_9_1954.json");
-        public static Scheme ISO_9_1968 { get; } = SchemeReader.Read("iso_9_1968.json");
-        public static Scheme ISO_9_1968_ALT { get; } = SchemeReader.Read("iso_9_1968_alt.json");
-        public static Scheme MVD_310 { get; } = SchemeReader.Read("mvd_310.json");
-        public static Scheme MVD_310_FR { get; } = SchemeReader.Read("mvd_310_fr.json");
-        public static Scheme MVD_782 { get; } = SchemeReader.Read("mvd_782.json");
-        public static Scheme UNGEGN_1987 { get; } = SchemeReader.Read("ungegn_1987.json");
+        public static Scheme Telegram { get; } = SchemeReader.Read(Properties.Resources.TELEGRAM);
+        public static Scheme Scientific { get; } = SchemeReader.Read(Properties.Resources.SCIENTIFIC);
+        public static Scheme ALA_LC  { get; } = SchemeReader.Read(Properties.Resources.ALA_LC);
+        public static Scheme ALA_LC_ALT { get; } = SchemeReader.Read(Properties.Resources.ALA_LC_ALT);
+        public static Scheme BGN_PCGN { get; } = SchemeReader.Read(Properties.Resources.BGN_PCGN);
+        public static Scheme BGN_PCGN_ALT { get; } = SchemeReader.Read(Properties.Resources.BGN_PCGN_ALT);
+        public static Scheme BS_2979 { get; } = SchemeReader.Read(Properties.Resources.BS_2979);
+        public static Scheme BS_2979_ALT { get; } = SchemeReader.Read(Properties.Resources.BS_2979_ALT);
+        public static Scheme GOST_16876 { get; } = SchemeReader.Read(Properties.Resources.GOST_16876);
+        public static Scheme GOST_16876_ALT { get; } = SchemeReader.Read(Properties.Resources.GOST_16876_ALT);
+        public static Scheme GOST_52290 { get; } = SchemeReader.Read(Properties.Resources.GOST_52290);
+        public static Scheme GOST_52535 { get; } = SchemeReader.Read(Properties.Resources.GOST_52535);
+        public static Scheme GOST_7034 { get; } = SchemeReader.Read(Properties.Resources.GOST_7034);
+        public static Scheme GOST_779 { get; } = SchemeReader.Read(Properties.Resources.GOST_779);
+        public static Scheme GOST_779_ALT { get; } = SchemeReader.Read(Properties.Resources.GOST_779_ALT);
+        public static Scheme ICAO_DOC_9303 { get; } = SchemeReader.Read(Properties.Resources.ICAO_DOC_9309);
+        public static Scheme ISO_9_1954 { get; } = SchemeReader.Read(Properties.Resources.ISO_9_1954);
+        public static Scheme ISO_9_1968 { get; } = SchemeReader.Read(Properties.Resources.ISO_9_1968);
+        public static Scheme ISO_9_1968_ALT { get; } = SchemeReader.Read(Properties.Resources.ISO_9_1968_ALT);
+        public static Scheme MVD_310 { get; } = SchemeReader.Read(Properties.Resources.MVD_310);
+        public static Scheme MVD_310_FR { get; } = SchemeReader.Read(Properties.Resources.MVD_310_FR);
+        public static Scheme MVD_782 { get; } = SchemeReader.Read(Properties.Resources.MVD_782);
+        public static Scheme UNGEGN_1987 { get; } = SchemeReader.Read(Properties.Resources.UNGEGN_1987);
     }
 }
