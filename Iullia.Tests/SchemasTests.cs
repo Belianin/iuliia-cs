@@ -12,7 +12,7 @@ namespace Iullia.Tests
         [Test, TestCaseSource(typeof(SchemasTestCasesFactory))]
         public void Scheme_Should_TranslateOwnSamples(Sample sample, Scheme scheme)
         {
-            Assert.AreEqual(sample.Translated, Engine.Translate(sample.Original, scheme));
+            Assert.AreEqual(sample.Translated, IuliiaTranslator.Translate(sample.Original, scheme));
         }
     }
     

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Iuliia.Utils;
 
 namespace Iuliia
 {
@@ -33,19 +34,20 @@ namespace Iuliia
             var previousKey = previous == null ? current.ToString() : $"{previous}{current}";
             if (previousMapping.TryGetValue(previousKey, out var letter))
                 return letter;
-            if (next != null && nextMapping.TryGetValue($"{current}{next}", out letter))
+            
+            var nextKey = next == null ? current.ToString() : $"{current}{next}";
+            if (nextMapping.TryGetValue(nextKey, out letter))
                 return letter;
-            if (letterMapping.TryGetValue(current, out letter))
-                return letter;
-            return current.ToString();
+            
+            return letterMapping.TryGetValue(current, out letter) ? letter : current.ToString();
         }
         
-        public string TranslateLetter(LetterInfo letterInfo)
+        internal string TranslateLetter(LetterInfo letterInfo)
         {
             return TranslateLetter(letterInfo.Previous, letterInfo.Current, letterInfo.Next);
         }
 
-        public bool TryTranslateEnding(string ending, out string translated)
+        internal bool TryTranslateEnding(string ending, out string translated)
         {
             return endingMapping.TryGetValue(ending, out translated);
         }

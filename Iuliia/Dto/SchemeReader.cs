@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using Iuliia.Utils;
 
-namespace Iuliia
+namespace Iuliia.Dto
 {
     internal static class SchemeReader
     {
@@ -24,24 +25,28 @@ namespace Iuliia
         
         private static Dictionary<char, string> GetMapping(IDictionary<char, string> mapping)
         {
-            mapping ??= new Dictionary<char, string>();
+            if (mapping == null)
+                return new Dictionary<char, string>();
+            
             var result = new Dictionary<char, string>(mapping);
             
-            foreach (var pair in mapping) 
-                result[char.ToUpper(pair.Key)] = pair.Value.Capitalize();
+            foreach (var (key, value) in mapping) 
+                result[char.ToUpper(key)] = value.Capitalize();
 
             return result;
         } 
         
         private static Dictionary<string, string> GetPreviousMapping(IDictionary<string, string> mapping)
         {
-            mapping ??= new Dictionary<string, string>();
+            if (mapping == null)
+                return new Dictionary<string, string>();
+            
             var result = new Dictionary<string, string>(mapping);
             
-            foreach (var pair in mapping)
+            foreach (var (key, value) in mapping)
             {
-                result[pair.Key.Capitalize()] = pair.Value;
-                result[pair.Key.ToUpper()] = pair.Value.Capitalize();
+                result[key.Capitalize()] = value;
+                result[key.ToUpper()] = value.Capitalize();
             }
 
             return result;
@@ -49,13 +54,15 @@ namespace Iuliia
 
         private static Dictionary<string, string> GetNextMapping(IDictionary<string, string> mapping)
         {
-            mapping ??= new Dictionary<string, string>();
+            if (mapping == null)
+                return new Dictionary<string, string>();
+            
             var result = new Dictionary<string, string>(mapping);
             
-            foreach (var pair in mapping)
+            foreach (var (key, value) in mapping)
             {
-                result[pair.Key.Capitalize()] = pair.Value.Capitalize();
-                result[pair.Key.ToUpper()] = pair.Value.Capitalize();
+                result[key.Capitalize()] = value.Capitalize();
+                result[key.ToUpper()] = value.Capitalize();
             }
 
             return result;
@@ -63,11 +70,13 @@ namespace Iuliia
         
         private static Dictionary<string, string> GetEndingMapping(IDictionary<string, string> mapping)
         {
-            mapping ??= new Dictionary<string, string>();
+            if (mapping == null)
+                return new Dictionary<string, string>();
+            
             var result = new Dictionary<string, string>(mapping);
             
-            foreach (var pair in mapping) 
-                result[pair.Key.ToUpper()] = pair.Value.ToUpper();
+            foreach (var (key, value) in mapping) 
+                result[key.ToUpper()] = value.ToUpper();
 
             return result;
         }

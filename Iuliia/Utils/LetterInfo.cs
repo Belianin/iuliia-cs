@@ -1,8 +1,8 @@
 namespace Iuliia
 {
-    public class LetterInfo
+    internal class LetterInfo
     {
-        public char? Previous { get; } // todo string or rune
+        public char? Previous { get; } // Rune
         public char Current { get; }
         public char? Next { get; }
 

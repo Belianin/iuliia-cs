@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Iuliia.Utils;
 
 namespace Iuliia
 {
-    public static class Engine
+    public static class IuliiaTranslator
     {
         private const int ENDING_LENGTH = 2;
 
@@ -35,11 +36,9 @@ namespace Iuliia
         private static WordInfo SplitWord(string word)
         {
             if (word.Length <= ENDING_LENGTH)
-                return new WordInfo(word, string.Empty); // todo without string empty
-            
-            return new WordInfo(
-                word.Substring(0, word.Length - ENDING_LENGTH),
-                word.Substring(word.Length - ENDING_LENGTH)); // todo [^2..0]
+                return new WordInfo(word, string.Empty);
+
+            return new WordInfo(word[..^ENDING_LENGTH], word[^ENDING_LENGTH..]);
         }
 
         private static IEnumerable<LetterInfo> ReadLetters(string stem)

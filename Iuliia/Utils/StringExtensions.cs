@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Iuliia
+namespace Iuliia.Utils
 {
     internal static class StringExtensions
     {

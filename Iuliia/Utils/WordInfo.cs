@@ -1,4 +1,4 @@
-namespace Iuliia
+namespace Iuliia.Utils
 {
     internal class WordInfo
     {
