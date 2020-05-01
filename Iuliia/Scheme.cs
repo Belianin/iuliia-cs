@@ -30,7 +30,8 @@ namespace Iuliia
 
         private string TranslateLetter(char? previous, char current, char? next)
         {
-            if (previous != null && previousMapping.TryGetValue($"{previous}{current}", out var letter))
+            var previousKey = previous == null ? current.ToString() : $"{previous}{current}";
+            if (previousMapping.TryGetValue(previousKey, out var letter))
                 return letter;
             if (next != null && nextMapping.TryGetValue($"{current}{next}", out letter))
                 return letter;
@@ -41,27 +42,12 @@ namespace Iuliia
         
         public string TranslateLetter(LetterInfo letterInfo)
         {
-            var translated = TranslateLetter(
-                ToLower(letterInfo.Previous),
-                ToLower(letterInfo.Current).Value,
-                ToLower(letterInfo.Next));
-
-            return char.IsUpper(letterInfo.Current) ? Capitalize(translated) : translated;
+            return TranslateLetter(letterInfo.Previous, letterInfo.Current, letterInfo.Next);
         }
 
         public bool TryTranslateEnding(string ending, out string translated)
         {
             return endingMapping.TryGetValue(ending, out translated);
-        }
-
-        private char? ToLower(char? c)
-        {
-            return c != null ? char.ToLower(c.Value) : (char?) null;
-        }
-
-        private string Capitalize(string str)
-        {
-            return $"{char.ToUpper(str[0])}{str.Substring(1)}";
         }
     }
 }
