@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iuliia", "Iuliia\Iuliia.csproj", "{09F2A823-3C0F-42DD-8279-3E0E8E94E79F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iullia.Tests", "Iullia.Tests\Iullia.Tests.csproj", "{6E627C98-E71A-4DC1-AC4B-C1DA3D90DA25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{09F2A823-3C0F-42DD-8279-3E0E8E94E79F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09F2A823-3C0F-42DD-8279-3E0E8E94E79F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09F2A823-3C0F-42DD-8279-3E0E8E94E79F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E627C98-E71A-4DC1-AC4B-C1DA3D90DA25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E627C98-E71A-4DC1-AC4B-C1DA3D90DA25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E627C98-E71A-4DC1-AC4B-C1DA3D90DA25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E627C98-E71A-4DC1-AC4B-C1DA3D90DA25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

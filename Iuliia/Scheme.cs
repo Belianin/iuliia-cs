@@ -21,11 +21,11 @@ namespace Iuliia
             IReadOnlyCollection<Sample> samples)
         {
             Name = name;
-            this.letterMapping = letterMapping;
-            this.previousMapping = previousMapping;
-            this.nextMapping = nextMapping;
-            this.endingMapping = endingMapping;
-            Samples = samples;
+            this.letterMapping = letterMapping ?? new Dictionary<char, string>();
+            this.previousMapping = previousMapping ?? new Dictionary<string, string>();
+            this.nextMapping = nextMapping ?? new Dictionary<string, string>();
+            this.endingMapping = endingMapping ?? new Dictionary<string, string>();
+            Samples = samples ?? new Sample[0];
         }
 
         private string TranslateLetter(char? previous, char current, char? next)
@@ -36,17 +36,32 @@ namespace Iuliia
                 return letter;
             if (letterMapping.TryGetValue(current, out letter))
                 return letter;
-            return letter;
+            return current.ToString();
         }
         
         public string TranslateLetter(LetterInfo letterInfo)
         {
-            return TranslateLetter(letterInfo.Previous, letterInfo.Current, letterInfo.Next);
+            var translated = TranslateLetter(
+                ToLower(letterInfo.Previous),
+                ToLower(letterInfo.Current).Value,
+                ToLower(letterInfo.Next));
+
+            return char.IsUpper(letterInfo.Current) ? Capitalize(translated) : translated;
         }
 
         public bool TryTranslateEnding(string ending, out string translated)
         {
             return endingMapping.TryGetValue(ending, out translated);
+        }
+
+        private char? ToLower(char? c)
+        {
+            return c != null ? char.ToLower(c.Value) : (char?) null;
+        }
+
+        private string Capitalize(string str)
+        {
+            return $"{char.ToUpper(str[0])}{str.Substring(1)}";
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.IO;
 using System.Linq;
 using System.Text.Json;
 
@@ -9,6 +10,9 @@ namespace Iuliia
         public static Scheme Mosmetro { get; }
         public static Scheme YandexMaps { get; }
         public static Scheme YandexMoney { get; }
+        /// <summary>
+        /// Инструкция Минсвязи о порядке обработки международных телеграмм. Некрасивая, зато без апострофов.
+        /// </summary>
         public static Scheme Telegram { get; }
         public static Scheme Scientific { get; }
         public static Scheme ALA_LC  { get; }
@@ -45,11 +49,13 @@ namespace Iuliia
 
         private static Scheme LoadScheme(string filename)
         {
-            var dto = JsonSerializer.Deserialize<SchemeDto>(filename);
+            var file = File.ReadAllText($"Schemas/{filename}");
+            
+            var dto = JsonSerializer.Deserialize<SchemeDto>(file);
             
             return new Scheme(
                 dto.Name,
-                dto.Mapping,
+                dto.Mapping.ToDictionary(k => k.Key[0], v => v.Value),
                 dto.PreviousMapping,
                 dto.NextMapping,
                 dto.EndingMapping,

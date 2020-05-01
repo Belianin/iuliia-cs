@@ -5,4 +5,10 @@
         <LangVersion>8</LangVersion>
     </PropertyGroup>
 
+    <ItemGroup>
+        <None Update="Schemas\**">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    
 </Project>

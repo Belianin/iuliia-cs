@@ -47,7 +47,7 @@ namespace Iuliia
             for (int i = 0; i < stem.Length; i++)
             {
                 var previous = i > 0 ? stem[i - 1] : (char?) null;
-                var next = i < stem.Length + 1 ? stem[i + 1] : (char?) null;
+                var next = i + 1 < stem.Length ? stem[i + 1] : (char?) null;
                 
                 yield return new LetterInfo(previous, stem[i], next);
             }
