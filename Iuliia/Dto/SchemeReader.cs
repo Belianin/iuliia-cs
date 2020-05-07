@@ -32,8 +32,9 @@ namespace Iuliia.Dto
             
             var result = new Dictionary<char, string>(mapping);
             
-            foreach (var (key, value) in mapping) 
-                result[char.ToUpper(key)] = value.Capitalize();
+            // do not use deconstruct (key, value) syntax for compatibility with netstandard2.0
+            foreach (var pair in mapping) 
+                result[char.ToUpper(pair.Key)] = pair.Value.Capitalize();
 
             return result;
         } 
@@ -45,10 +46,10 @@ namespace Iuliia.Dto
             
             var result = new Dictionary<string, string>(mapping);
             
-            foreach (var (key, value) in mapping)
+            foreach (var pair in mapping)
             {
-                result[key.Capitalize()] = value;
-                result[key.ToUpper()] = value.Capitalize();
+                result[pair.Key.Capitalize()] = pair.Value;
+                result[pair.Key.ToUpper()] = pair.Value.Capitalize();
             }
 
             return result;
@@ -61,10 +62,10 @@ namespace Iuliia.Dto
             
             var result = new Dictionary<string, string>(mapping);
             
-            foreach (var (key, value) in mapping)
+            foreach (var pair in mapping)
             {
-                result[key.Capitalize()] = value.Capitalize();
-                result[key.ToUpper()] = value.Capitalize();
+                result[pair.Key.Capitalize()] = pair.Value.Capitalize();
+                result[pair.Key.ToUpper()] = pair.Value.Capitalize();
             }
 
             return result;
@@ -77,8 +78,8 @@ namespace Iuliia.Dto
             
             var result = new Dictionary<string, string>(mapping);
             
-            foreach (var (key, value) in mapping) 
-                result[key.ToUpper()] = value.ToUpper();
+            foreach (var pair in mapping) 
+                result[pair.Key.ToUpper()] = pair.Value.ToUpper();
 
             return result;
         }

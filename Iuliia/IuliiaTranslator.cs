@@ -38,7 +38,10 @@ namespace Iuliia
             if (word.Length <= ENDING_LENGTH)
                 return new WordInfo(word, string.Empty);
 
-            return new WordInfo(word[..^ENDING_LENGTH], word[^ENDING_LENGTH..]);
+            // do not use range [..] syntax for compatibility with netstandard2.0
+            return new WordInfo(
+                word.Substring(0, word.Length - ENDING_LENGTH),
+                word.Substring(word.Length - ENDING_LENGTH));
         }
 
         private static IEnumerable<LetterInfo> ReadLetters(string stem)
