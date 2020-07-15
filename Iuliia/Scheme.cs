@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Iuliia.Utils;
 
 namespace Iuliia
@@ -19,14 +20,14 @@ namespace Iuliia
             IDictionary<string, string> previousMapping,
             IDictionary<string, string> nextMapping,
             IDictionary<string, string> endingMapping,
-            IReadOnlyCollection<Sample> samples)
+            IEnumerable<Sample> samples)
         {
             Name = name;
             this.letterMapping = letterMapping ?? new Dictionary<char, string>();
             this.previousMapping = previousMapping ?? new Dictionary<string, string>();
             this.nextMapping = nextMapping ?? new Dictionary<string, string>();
             this.endingMapping = endingMapping ?? new Dictionary<string, string>();
-            Samples = samples ?? new Sample[0];
+            Samples = samples != null ? samples.ToArray() : new Sample[0];
         }
 
         private string TranslateLetter(char? previous, char current, char? next)
@@ -42,10 +43,8 @@ namespace Iuliia
             return letterMapping.TryGetValue(current, out letter) ? letter : current.ToString();
         }
         
-        internal string TranslateLetter(LetterInfo letterInfo)
-        {
-            return TranslateLetter(letterInfo.Previous, letterInfo.Current, letterInfo.Next);
-        }
+        internal string TranslateLetter(LetterInfo letterInfo) => 
+            TranslateLetter(letterInfo.Previous, letterInfo.Current, letterInfo.Next);
 
         internal bool TryTranslateEnding(string ending, out string translated)
         {
