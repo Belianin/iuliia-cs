@@ -3,7 +3,7 @@
         <LangVersion>latest</LangVersion>
         <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
         <PackageId>Iuliia</PackageId>
-        <Version>2.0.3</Version>
+        <Version>2.0.4</Version>
         <Authors>Andrey Belianin</Authors>
         <Description>Library for transliteration from russian cyrilic to latin</Description>
         <Configurations>Debug;Release</Configurations>
