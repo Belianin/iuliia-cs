@@ -1,7 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
 using Iuliia.Dto;
 
 namespace Iuliia
 {
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class Schemas
     {
         /// <summary>

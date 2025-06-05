@@ -1,54 +1,34 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Iuliia.Utils;
 
 namespace Iuliia
 {
     public class Scheme
     {
-        private readonly IDictionary<char, string> letterMapping;
-        private readonly IDictionary<string, string> previousMapping;
-        private readonly IDictionary<string, string> nextMapping;
-        private readonly IDictionary<string, string> endingMapping;
+        internal readonly Dictionary<char, string> LetterMapping; // not IDictionary
+        internal readonly ValueTuple<ReadOnlyMemory<char>, string>[] PreviousMapping;
+        internal readonly ValueTuple<ReadOnlyMemory<char>, string>[] NextMapping;
+        internal readonly ValueTuple<ReadOnlyMemory<char>, string>[] EndingMapping;
 
         public IReadOnlyCollection<Sample> Samples { get; }
         public string Name { get; }
         
         public Scheme(
             string name,
-            IDictionary<char, string> letterMapping,
+            Dictionary<char, string> letterMapping,
             IDictionary<string, string> previousMapping,
             IDictionary<string, string> nextMapping,
             IDictionary<string, string> endingMapping,
             IEnumerable<Sample> samples)
         {
             Name = name;
-            this.letterMapping = letterMapping ?? new Dictionary<char, string>();
-            this.previousMapping = previousMapping ?? new Dictionary<string, string>();
-            this.nextMapping = nextMapping ?? new Dictionary<string, string>();
-            this.endingMapping = endingMapping ?? new Dictionary<string, string>();
-            Samples = samples != null ? samples.ToArray() : new Sample[0];
-        }
+            this.LetterMapping = letterMapping ?? new Dictionary<char, string>();
+            Samples = samples != null ? samples.ToArray() : Array.Empty<Sample>();
 
-        private string TranslateLetter(char? previous, char current, char? next)
-        {
-            var previousKey = previous == null ? current.ToString() : $"{previous}{current}";
-            if (previousMapping.TryGetValue(previousKey, out var letter))
-                return letter;
-            
-            var nextKey = next == null ? current.ToString() : $"{current}{next}";
-            if (nextMapping.TryGetValue(nextKey, out letter))
-                return letter;
-            
-            return letterMapping.TryGetValue(current, out letter) ? letter : current.ToString();
-        }
-        
-        internal string TranslateLetter(LetterInfo letterInfo) => 
-            TranslateLetter(letterInfo.Previous, letterInfo.Current, letterInfo.Next);
-
-        internal bool TryTranslateEnding(string ending, out string translated)
-        {
-            return endingMapping.TryGetValue(ending, out translated);
+            PreviousMapping = previousMapping.Select(x => (x.Key.ToString().AsMemory(), x.Value)).ToArray();
+            NextMapping = nextMapping.Select(x => (x.Key.ToString().AsMemory(), x.Value)).ToArray();
+            EndingMapping = endingMapping.Select(x => (x.Key.ToString().AsMemory(), x.Value)).ToArray();
         }
     }
 }

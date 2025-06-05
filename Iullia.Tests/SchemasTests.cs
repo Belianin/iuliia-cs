@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,10 @@ namespace Iullia.Tests
         [Test, TestCaseSource(typeof(SchemasTestCasesFactory))]
         public void Scheme_Should_TranslateOwnSamples(Sample sample, Scheme scheme)
         {
-            Assert.That(IuliiaTranslator.Translate(sample.Original, scheme), Is.EqualTo(sample.Translated));
+            Assert.That(
+                IuliiaTranslator.Translate(sample.Original, scheme),
+                Is.EqualTo(sample.Translated),
+                $"Original: {sample.Original}{Environment.NewLine}");
         }
     }
     
