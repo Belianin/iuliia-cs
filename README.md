@@ -21,7 +21,7 @@ IuliiaTranslator.Translate("Юлия Щеглова", Schemas.Mosmetro);
 ## Installation
 
 ```sh
-Install-Package Iuliia -Version 2.1.0
+Install-Package Iuliia -Version 2.2.0
 ```
 
 [Nuget package](https://www.nuget.org/packages/Iuliia/)
