@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Iuliia.Utils;
@@ -6,10 +7,10 @@ namespace Iuliia
 {
     public class Scheme
     {
-        private readonly IDictionary<char, string> letterMapping;
-        private readonly IDictionary<string, string> previousMapping;
-        private readonly IDictionary<string, string> nextMapping;
-        private readonly IDictionary<string, string> endingMapping;
+        private readonly Dictionary<char, string> letterMapping;
+        private readonly Dictionary<string, string> previousMapping;
+        private readonly Dictionary<string, string> nextMapping;
+        private readonly Dictionary<string, string> endingMapping;
 
         public IReadOnlyCollection<Sample> Samples { get; }
         public string Name { get; }
@@ -23,11 +24,70 @@ namespace Iuliia
             IEnumerable<Sample> samples)
         {
             Name = name;
-            this.letterMapping = letterMapping ?? new Dictionary<char, string>();
-            this.previousMapping = previousMapping ?? new Dictionary<string, string>();
-            this.nextMapping = nextMapping ?? new Dictionary<string, string>();
-            this.endingMapping = endingMapping ?? new Dictionary<string, string>();
-            Samples = samples != null ? samples.ToArray() : new Sample[0];
+            this.letterMapping = GetMapping(letterMapping);
+            this.previousMapping = GetPreviousMapping(previousMapping);
+            this.nextMapping = GetNextMapping(nextMapping);
+            this.endingMapping = GetEndingMapping(endingMapping);
+            Samples = samples?.ToArray() ?? Array.Empty<Sample>();
+        }
+
+        private static Dictionary<char, string> GetMapping(IDictionary<char, string> mapping)
+        {
+            if (mapping == null)
+                return new Dictionary<char, string>();
+
+            var result = new Dictionary<char, string>(mapping);
+
+            // do not use deconstruct (key, value) syntax for compatibility with netstandard2.0
+            foreach (var pair in mapping)
+                result[char.ToUpper(pair.Key)] = pair.Value.Capitalize();
+
+            return result;
+        }
+
+        private static Dictionary<string, string> GetPreviousMapping(IDictionary<string, string> mapping)
+        {
+            if (mapping == null)
+                return new Dictionary<string, string>();
+
+            var result = new Dictionary<string, string>(mapping);
+
+            foreach (var pair in mapping)
+            {
+                result[pair.Key.Capitalize()] = pair.Value;
+                result[pair.Key.ToUpper()] = pair.Value.Capitalize();
+            }
+
+            return result;
+        }
+
+        private static Dictionary<string, string> GetNextMapping(IDictionary<string, string> mapping)
+        {
+            if (mapping == null)
+                return new Dictionary<string, string>();
+
+            var result = new Dictionary<string, string>(mapping);
+
+            foreach (var pair in mapping)
+            {
+                result[pair.Key.Capitalize()] = pair.Value.Capitalize();
+                result[pair.Key.ToUpper()] = pair.Value.Capitalize();
+            }
+
+            return result;
+        }
+
+        private static Dictionary<string, string> GetEndingMapping(IDictionary<string, string> mapping)
+        {
+            if (mapping == null)
+                return new Dictionary<string, string>();
+
+            var result = new Dictionary<string, string>(mapping);
+
+            foreach (var pair in mapping)
+                result[pair.Key.ToUpper()] = pair.Value.ToUpper();
+
+            return result;
         }
 
         private string TranslateLetter(char? previous, char current, char? next)

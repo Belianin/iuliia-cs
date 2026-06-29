@@ -1,37 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <LangVersion>latest</LangVersion>
-        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+        <TargetFrameworks>netstandard2.0</TargetFrameworks>
         <PackageId>Iuliia</PackageId>
-        <Version>2.0.4</Version>
+        <Version>2.1.0</Version>
         <Authors>Andrey Belianin</Authors>
         <Description>Library for transliteration from russian cyrilic to latin</Description>
-        <Configurations>Debug;Release</Configurations>
+        <Configurations>Release</Configurations>
         <Platforms>AnyCPU</Platforms>
         <Title>Iuliia</Title>
-        <PackageProjectUrl>https://dangry.ru/iuliia/</PackageProjectUrl>
+        <PackageProjectUrl>https://iuliia.ru/</PackageProjectUrl>
         <RepositoryUrl>https://github.com/Belianin/iuliia-cs</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
         <PackageTags>Transliteration</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
     </PropertyGroup>
-
     <ItemGroup>
-      <PackageReference Include="System.Text.Json" Version="8.0.5" />
+      <ProjectReference 
+        Include="..\Iuliia.SourceGenerator\Iuliia.SourceGenerator.csproj" 
+        OutputItemType="Analyzer"
+        ReferenceOutputAssembly="false"
+        AdditionalProperties="Configuration=Debug" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Compile Update="Properties\Resources.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Resources.resx</DependentUpon>
-      </Compile>
-    </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Update="Properties\Resources.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-    </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Schemas/**/*.json" />
+    <AdditionalFiles Include="Schemas/**/*.json" />
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\LICENSE" Pack="true" PackagePath="\" />
+  </ItemGroup>
     
 </Project>

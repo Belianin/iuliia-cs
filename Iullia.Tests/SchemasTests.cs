@@ -24,7 +24,7 @@ namespace Iullia.Tests
                 .GetProperties()
                 .Select(p => (Scheme) p.GetValue(null))
                 .SelectMany(scheme => scheme.Samples.Select(sample =>
-                    new TestCaseData(sample, scheme).SetArgDisplayNames(scheme.Name)))
+                    new TestCaseData(sample, scheme).SetArgDisplayNames($"{scheme.Name}({sample.Translated})")))
                 .GetEnumerator();
         }
 

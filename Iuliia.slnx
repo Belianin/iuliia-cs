@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Iuliia.SourceGenerator/Iuliia.SourceGenerator.csproj" />
+  <Project Path="Iuliia/Iuliia.csproj" />
+  <Project Path="Iullia.Tests/Iullia.Tests.csproj" />
+</Solution>
